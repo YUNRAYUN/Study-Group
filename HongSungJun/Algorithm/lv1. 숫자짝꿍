@@ -1,0 +1,27 @@
+function solution(X, Y) {
+    let arrX = Array(10).fill(0);
+    let arrY = Array(10).fill(0);
+    let arr = [];
+    for(let i = 0; i < X.length;i++){
+        arrX[X[i]]++;
+    }
+     for(let i = 0; i < Y.length;i++){
+        arrY[Y[i]]++;
+    }
+    for(let i = 0; i < 10;i++){
+        if(arrX[i] !== 0 && arrY[i] !== 0){
+            let min = Math.min(arrX[i],arrY[i]);
+            for(let j = 0; j < min;j++){
+                arr.push(i);
+            }
+        }
+    }
+    arr.sort((a,b) => b-a);
+    if(arr.length === 0){
+        return "-1";
+    }
+    if(arr[0] === 0){
+        return "0";
+    }
+    return arr.join("");
+}

@@ -1,0 +1,17 @@
+function solution(babbling) {
+ let count = 0
+   let arr = ['aya','ye','ma','woo']
+   for(let i = 0; i < babbling.length;i++){
+       for(let j = 0; j < arr.length;j++){
+           if(babbling[i].includes(arr[j].repeat(2))){
+                break
+           }
+         babbling[i] = babbling[i].split(arr[j]).join(" ")
+       }
+     if(babbling[i].split(" ").join("").length === 0){
+          count++
+     }
+   }
+  
+  return count
+   }

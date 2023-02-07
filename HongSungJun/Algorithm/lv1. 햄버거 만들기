@@ -1,0 +1,18 @@
+function solution(ingredient) {
+     let arr = [];
+    let num = 0;
+  for(let i = 0; i< ingredient.length;i++){
+    arr.push(ingredient[i])
+    if(arr.length>=4){
+      if(arr[arr.length-1] === 1 && arr[arr.length-2] === 3 && arr[arr.length-3] === 2 && arr[arr.length-4] === 1){
+        num++;
+        arr.pop();
+          arr.pop();
+          arr.pop();
+          arr.pop();
+       
+      }
+    }
+  }
+    return num;
+}

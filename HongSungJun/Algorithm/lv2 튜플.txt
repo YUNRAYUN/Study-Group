@@ -1,0 +1,22 @@
+function solution(s) {
+    let answer = []
+    s = s.split("},")
+    
+    
+    for(let i = 0; i < s.length;i++){
+        s[i] = s[i].replace(/{|}/g,"")
+        s[i] = s[i].split(",")
+        for(let j = 0; j < s[i].length;j++){
+            s[i][j] = Number(s[i][j])
+        }
+    }
+    s.sort((a,b) => a.length - b.length)
+    for(let i = 0; i < s.length;i++){
+        for(let j = 0; j < s[i].length;j++){
+            if(!answer.includes(s[i][j])){
+                answer.push(s[i][j])
+            }
+}
+    }
+    return answer
+}

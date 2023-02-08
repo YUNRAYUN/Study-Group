@@ -1,0 +1,37 @@
+function solution(cacheSize, cities) {
+    let arr = []
+    let count = 0
+    cities = cities.map((el) => el.toLowerCase())
+    if(cacheSize === 0){
+        return cities.length * 5
+    }
+    for(let i = 0 ; i < cities.length;i++){
+        const index = arr.indexOf(cities[i])
+        if(arr.length < cacheSize){
+            if(index === -1){
+                arr.unshift(cities[i])
+                count = count + 5
+            }
+            else{
+                arr.splice(index,1)
+                arr.unshift(cities[i])
+                count++
+            }
+        }
+        else{
+            if(index===-1){
+                arr.pop()
+                arr.unshift(cities[i])
+                count = count + 5
+            }
+            else{
+                arr.splice(index,1)
+                arr.unshift(cities[i])
+                count++
+            }
+            
+        }
+        
+    }
+    return count
+}

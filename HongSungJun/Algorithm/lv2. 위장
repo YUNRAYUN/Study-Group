@@ -1,0 +1,24 @@
+
+function solution(clothes) {
+    let info = {}
+    let count = 1
+    for(let i = 0 ; i < clothes.length;i++){
+        if(info[clothes[i][1]] === undefined){
+            info[clothes[i][1]] = [clothes[i][0]]
+        }
+        else{
+            info[clothes[i][1]].push(clothes[i][0])
+        }
+    }
+    const arr = Object.values(info)
+    if(arr.length === 1){
+        return arr[0].length
+    }
+    for(let key in info){
+        count *= info[key].length + 1
+    }
+      return count-1
+  
+    
+    
+}

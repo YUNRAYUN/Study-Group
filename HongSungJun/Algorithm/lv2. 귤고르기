@@ -1,0 +1,33 @@
+function solution(k, tangerine) {
+   let answer = []
+   let arr = []
+   let arr2 = []
+   tangerine.sort((a,b) => a-b)
+    arr2.push(tangerine[0])
+   for(let i = 1; i < tangerine.length;i++){
+       
+       if(arr2[arr2.length - 1] !== tangerine[i]){
+           arr.push(arr2)
+           arr2 = []
+           arr2.push(tangerine[i])
+       }
+       else{
+           arr2.push(tangerine[i])
+       }
+   }
+    arr.push(arr2)
+    arr.sort((a,b) => b.length-a.length)
+    for(let i = 0; i < arr.length;i++){
+        for(let j = 0; j < arr[i].length;j++){
+            if(answer.length > k-1){
+                break
+            }
+            else{
+                answer.push(arr[i][j])
+            }
+        }
+    }
+    
+   return Array.from(new Set(answer)).length
+    
+}

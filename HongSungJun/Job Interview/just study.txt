@@ -1,0 +1,5 @@
+1. express.js는 무엇때문에 사용하는 것일까??
+express.js는 node.js로 서버를 빠르고 간편하게 만들 수 있게 도와주는 웹 프레임워크이기 때문이다.
+
+2. 대표적인 rest api와 http method 5가지는 무엇일까?
+get post put patch delete

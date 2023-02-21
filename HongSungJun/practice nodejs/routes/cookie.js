@@ -2,7 +2,7 @@ import express from 'express'
 import jwt from 'jsonwebtoken'
 
 const router = express.Router()
-
+router.use(express.json())
 let tokenObj = {}
 const SECRET_KEY = "1234"
 
@@ -50,10 +50,8 @@ router.get('/get-token',(req,res) => {
     if(!refreshToken){
         return res.status(400).send("refreshToken이 존재하지 않습니다.")
     }
-    console.log(accessToken,refreshToken)
     const isAceess = validateAccessToken(accessToken)
     const isRefresh = validateRefreshToken(refreshToken)
-    console.log(isAceess,isRefresh)
     if(isRefresh === false){
         return res.status(419).json({"message" : "리프레시 토큰이 만료되었습니다."})
     }
@@ -69,6 +67,23 @@ router.get('/get-token',(req,res) => {
 
     const {id} = getAccessTokenPayload(accessToken)
     return res.json({"message" : `${id}의 정보를 가진 토큰이 성공적으로 인증되었습니다.`})
+
+})
+
+router.post('/set-key',(req,res) => {
+  console.log(req.body)
+  const {key} = req.body
+  const token = jwt.sign({key},SECRET_KEY,{expiresIn:'1m'})
+  res.cookie('token',token)
+  return res.status(200).json({"message" : "성공적으로 토큰이 발급되었습니다."})
+})
+
+router.get('/get-key', (req,res) => {
+  const cookie = req.headers.cookie
+  const token = cookie.replace("token=","")
+  const verifiedKey = jwt.verify(token,SECRET_KEY)
+  const {key} = verifiedKey
+  return res.send(key)
 
 })
 

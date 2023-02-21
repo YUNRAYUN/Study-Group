@@ -1,6 +1,7 @@
 import express from 'express'
+import {goods as Goods} from '../model/goods.js'
 const router = express.Router()
-
+router.use(express.json())
 const goods = [
     {
         goodsId: 4,
@@ -51,5 +52,22 @@ router.get("/goods/:goodsId", (req,res) => {
     const result = goods.filter((el) => el.goodsId === id)
     res.json({goodsId : result})
 })  
+
+router.post('/goods', async (req,res) => {
+  const {goodsId,name,price} = req.body
+  const goods = await Goods.find({goodsId})
+  console.log(goods)
+  if(goods.length){
+    return res.status(400).send("이미 존재하는 데이터입니다.")
+  }
+
+  const createGoods = await Goods.create({
+    goodsId,
+    name,
+    price
+  })
+
+  res.send(createGoods)
+})
 
 export {router}

@@ -1,0 +1,27 @@
+function solution(arr1, arr2) {
+    let arr = []
+    let arr3 = []
+    let arr4 = []
+    let answer = []
+    let count = 0
+    for(let i = 0; i < arr2[0].length;i++){
+       for(let j = 0; j < arr2.length;j++){
+               arr3.push(arr2[j][i])
+       }
+        arr.push(arr3)
+        arr3 = []
+    }
+    
+    for(let i = 0; i < arr1.length;i++){
+        for(let j = 0; j < arr.length;j++){
+            for(let k = 0; k< arr[j].length;k++){
+                count += arr1[i][k] * arr[j][k]
+            }
+            arr4.push(count)
+            count = 0
+        }
+        answer.push(arr4)
+        arr4 = []
+    }
+    return answer
+}

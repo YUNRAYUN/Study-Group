@@ -1,0 +1,10 @@
+function solution(citations) {
+    let count = 0
+    let len = citations.length
+    citations.sort((a,b) => b-a)
+    for(let i = 0; i < citations.length;i++){
+        if(i >= citations[i]) return i
+    }
+    return citations.length
+
+}

@@ -1,0 +1,20 @@
+function solution(elements) {
+    let sum = 0
+    let arr = []
+    for(let i = 1; i <= elements.length;i++){
+        const el = elements.concat(elements.slice(0,i))
+        for(let j = 0; j < el.length;j++){
+            const els = el.slice(j,j+i)
+           
+            for(let k = 0; k < els.length;k++){
+                sum += els[k]
+            }
+            arr.push(sum)
+            sum = 0
+        }
+    }
+    const newArr = Array.from(new Set(arr))
+    
+    return newArr.length
+    
+}

@@ -1,0 +1,21 @@
+function solution(n, t, m, p) {
+    let arr = []
+    let answer = []
+    let count = 0
+    let result = ''
+    for(let i = 0; i <= 100000;i++){
+        
+        for(let j = 0; j < i.toString(n).split("").length;j++){
+            arr.push(i.toString(n).split("")[j])
+        }
+    }
+    while(answer.length < t){
+        answer.push(arr[(p-1) + count])
+        count = count + m
+    }
+    for(let i = 0; i < answer.length;i++){
+        result += answer[i].toUpperCase()
+    }
+    return result
+    
+}

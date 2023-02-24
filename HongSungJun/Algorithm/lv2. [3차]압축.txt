@@ -1,0 +1,27 @@
+
+
+function solution(msg) {
+  const obj = {}
+  let index = 1
+  for(let i = 65; i <= 90;i++){
+      obj[String.fromCharCode(i)] = index
+      index++
+  }
+    const answer = []
+    let str = ''
+    for(let i = 0; i < msg.length;i++){
+        str += msg[i]
+        const next = str + msg[i+1]
+        
+        if(obj[next] === undefined){
+            if(msg[i+1] !== undefined){
+                obj[next] = index
+            }
+            index++
+            answer.push(obj[str])
+            str = ""
+        }
+        
+    }
+    return answer
+}

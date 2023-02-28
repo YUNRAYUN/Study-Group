@@ -1,0 +1,48 @@
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+function solution(str1, str2) {
+   str1 = str1.toUpperCase()
+    str2 = str2.toUpperCase()
+    let arr1 = []
+    let arr2 = []
+    let same = []
+    let all = []
+    for(let i = 0; i < str1.length;i++){
+        const [first,second] = str1.slice(i,i+2).split("")
+        if(alphabet.includes(first) === false || alphabet.includes(second) === false){
+            continue
+        }
+        
+        arr1.push(str1.slice(i,i+2))
+        
+    }
+    for(let i = 0; i < str2.length;i++){
+        const [first,second] = str2.slice(i,i+2).split("")
+        if(alphabet.includes(first) === false || alphabet.includes(second) === false){
+            continue
+        }
+        
+        arr2.push(str2.slice(i,i+2))
+        
+    }
+    
+  
+    if(arr1.length === 0 && arr2.length === 0){
+        return 65536
+    }
+    if(arr1.length === 0 || arr2.length === 0){
+        return 0
+    }
+    for(let i = 0; i < arr1.length;i++){
+        if(arr2.includes(arr1[i])){
+            const index = arr2.indexOf(arr1[i])
+            arr2.splice(index,1)
+            same.push(arr1[i])
+        }
+        else{
+            all.push(arr1[i])
+        }
+    }
+    console.log(arr1,arr2,same,all)
+    return Math.floor((same.length / (same.length + arr2.length + all.length)) * 65536)
+}

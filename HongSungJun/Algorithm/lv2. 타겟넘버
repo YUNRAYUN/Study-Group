@@ -1,0 +1,21 @@
+function solution(numbers, target) {
+    let count = 0
+    let arr = [numbers[0], -numbers[0]]
+    for(let i= 1 ; i < numbers.length;i++){
+        let arr2 = []
+        const nextNumber = numbers[i]
+        for(let qqq of arr){
+            arr2.push(qqq + nextNumber)
+            arr2.push(qqq - nextNumber)
+        }
+        arr = arr2
+    }
+    for(qqq of arr){
+        if(target === qqq){
+            count++
+        }
+    }
+    return count
+    
+    
+}

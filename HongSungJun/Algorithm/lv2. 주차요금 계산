@@ -1,0 +1,80 @@
+ function solution(fees, records) {
+    let arr = []
+    let answer = []
+    let obj = {}
+    let set = []
+    for(let i = 0; i < records.length;i++){
+        const obj = {}
+        const [time,num,action] = records[i].split(" ")
+        arr.push({time,num,action})
+      set.push(num)
+    }
+    arr.sort((a,b) => a.num - b.num)
+   const newSet = Array.from(new Set(set))
+    while(arr.length > 0){
+        let result = 0
+        if(arr[1] !== undefined){
+            if(arr[0].num === arr[1].num){
+            let prevHour = Number(arr[0].time.split(":")[0])
+            let prevMin = Number(arr[0].time.split(":")[1])
+            let hour = Number(arr[1].time.split(":")[0])
+            let Min = Number(arr[1].time.split(":")[1])
+            
+            result += (hour - prevHour) * 60
+            result += Min - prevMin
+              if(obj[arr[0].num] === undefined){
+                obj[arr[0].num] = result
+              }
+              else{
+                obj[arr[0].num] += result
+              }
+            arr.splice(0,2)
+        
+        }
+          else{
+            let prevHour = Number(arr[0].time.split(":")[0])
+            let prevMin = Number(arr[0].time.split(":")[1])
+            
+            result += (23 - prevHour) * 60
+            result += 59 - prevMin
+            
+        
+             if(obj[arr[0].num] === undefined){
+                obj[arr[0].num] = result
+              }
+              else{
+                obj[arr[0].num] += result
+              }
+            arr.splice(0,1)
+          }
+        }else
+        {
+            let prevHour = Number(arr[0].time.split(":")[0])
+            let prevMin = Number(arr[0].time.split(":")[1])
+            
+            result += (23 - prevHour) * 60
+            result += 59 - prevMin
+             if(obj[arr[0].num] === undefined){
+                obj[arr[0].num] = result
+              }
+              else{
+                obj[arr[0].num] += result
+              }
+            arr.splice(0,1)
+        }
+
+    }
+   
+   for(let key in obj){
+     if(obj[key] < fees[0]){
+       obj[key] = fees[1]
+     }
+     else{
+       let num = fees[1] + Math.ceil(((obj[key] - fees[0])/ fees[2])) * fees[3]
+     obj[key] = num
+     }
+   }
+     newSet.sort((a,b) => a-b)
+
+   return newSet.map(el => obj[el])
+}

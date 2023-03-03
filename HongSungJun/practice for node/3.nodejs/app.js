@@ -92,7 +92,7 @@ app.get("/get-token", (req, res) => {
   
   function validateAccessToken(accessToken) {
     try {
-      jwt.verify(accessToken, SECRET_KEY); 
+      jwt.verify(accessToken, process.env.SECRETKEY); 
       return true;
     } catch (error) {
       return false;

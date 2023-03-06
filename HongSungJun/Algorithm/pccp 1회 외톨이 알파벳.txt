@@ -1,0 +1,34 @@
+function solution(input_string) {
+  let copy = input_string
+    let str = ''
+    let arr = []
+    while(input_string.length > 0){
+        let str1 = input_string[0]
+        arr.push(str1)
+        let rgp = `${input_string[0]}`
+        let re = new RegExp(rgp,'g')
+        let count = input_string.match(re).filter((item) => item !== "").length
+        for(let i = 1; i < input_string.length;i++){
+            if(str1 !== input_string[i]){
+                    break
+            }
+            else{
+                arr.push(input_string[i])
+            }
+        }
+      
+      if(arr.length !== count){
+        str += str1
+        arr = []
+        input_string = input_string.replace(str1,"")
+      }
+      else{
+        arr = []
+        input_string = input_string.replace(str1,"")
+      }
+        
+    }
+
+const answer = Array.from(new Set(str.split(""))).sort().join("")
+    return answer ? answer : "N"
+}

@@ -1,0 +1,36 @@
+const obj = {}
+
+
+function solution(want, number, discount) {
+    let count = 0
+    if(!discount.includes(want[0])) return 0
+    
+    for(let i = 0; i < want.length;i++){
+        obj[want[i]] = number[i]
+    }
+    for(let i = 0; i < discount.length;i++){
+        const disInfo = {}
+        let arr = discount.slice(i, i + 10)
+        for(let j = 0; j < arr.length;j++){
+            if(disInfo[arr[j]] !== undefined){
+                disInfo[arr[j]]++
+            }
+            else{
+                disInfo[arr[j]] = 1
+            }
+        }
+        if(qqq(obj,disInfo)) count++
+        
+    }
+    return count
+    
+}
+
+function qqq(obj,obj2){
+    for(let key in obj){
+        if(obj[key] !== obj2[key]){
+            return false
+        }
+    }
+    return true
+}

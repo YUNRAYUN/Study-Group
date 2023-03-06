@@ -1,0 +1,64 @@
+// 변경하기 전
+
+const obj = {
+    RR : ["RR","RR","RR","RR"],
+    Rr: ["RR","Rr","Rr","rr"],
+    rr: ["rr","rr","rr","rr"]
+}
+function solution(queries) {
+
+   let answer = [];
+    let len = 2
+
+    
+    for(let i = 0; i < queries.length;i++){
+      let temp = [...obj["Rr"]]
+        const [ge,gr] = queries[i];
+        if(ge === 1){
+            answer.push("Rr");
+        } 
+        else{
+                while(len !== ge){
+                   let prevTemp = [...temp];
+                   temp = [];
+                    for(let j = 0; j < prevTemp.length;j++){
+                            temp.push(...obj[prevTemp[j]]);
+                    }
+                    len++
+                }
+                answer.push(temp[gr-1]);
+                 len = 2
+        }
+
+    }
+
+    return answer;
+}
+//변경 후
+function qqq(ge,idx){
+  if(ge === 1) return "Rr"
+    
+    let arr = []
+    
+    idx -= 1
+    while(ge > 1){
+        arr.push(idx % 4)
+        idx = Math.floor(idx / 4)
+        ge--
+    }
+    
+    while(arr.length > 0){
+        let num = arr.pop()
+        if(num === 0) return "RR"
+        else if(num === 3) return "rr"
+    }
+    return "Rr"
+}
+function solution(queries) {
+  let arr = []
+  for(let i = 0; i < queries.length;i++){
+    const [ge,gr] = queries[i]
+    arr.push(qqq(ge,gr))
+  }
+  return arr
+}

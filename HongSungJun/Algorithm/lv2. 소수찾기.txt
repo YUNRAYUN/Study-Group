@@ -1,0 +1,34 @@
+let set = new Set()
+
+function solution(numbers) {
+    let count = 0
+    comb("",numbers)
+    for(qq of set){
+        
+        if(qqq(Number(qq))) count++
+    }
+    return count
+    
+}
+function comb(string, numbers){
+    
+    if(string !== ""){
+        
+        set.add(Number(string))
+    }
+    for(let i = 0; i < numbers.length;i++){
+        comb(string+numbers[i],numbers.slice(0,i) + numbers.slice(i+1))
+    }
+}
+
+function qqq(num){
+    if(num === 1 || num === 0){
+        return false
+    }
+    for(let i = 2; i <=Math.sqrt(num);i++){
+        if(num % i === 0) {
+            return false
+        }
+    }
+    return true
+}

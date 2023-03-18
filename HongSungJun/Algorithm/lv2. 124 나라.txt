@@ -1,0 +1,14 @@
+function solution(n) {
+    let arr = []
+    while(n > 0){
+        if(n % 3 === 0){
+            arr.push(4)
+            n = Math.floor(n / 3) - 1
+        }
+        else{
+            arr.push(n % 3)
+            n = Math.floor(n / 3)
+        }
+    }
+    return arr.reverse().join("")
+}

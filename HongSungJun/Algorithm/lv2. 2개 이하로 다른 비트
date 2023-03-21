@@ -1,0 +1,16 @@
+function solution(numbers) {
+    let arr = []
+   for(let i = 0 ; i < numbers.length;i++){
+       if(numbers[i] % 2 === 0){
+           
+           arr.push(numbers[i] + 1)
+           
+       }
+       else{
+           let num = "0"+numbers[i].toString(2)
+           const index = num.lastIndexOf("0")
+           arr.push(parseInt(`${num.slice(0,index)}10${num.slice(index+2)}`,2))
+       }
+   }
+    return arr
+}

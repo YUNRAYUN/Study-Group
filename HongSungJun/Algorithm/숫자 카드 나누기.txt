@@ -1,0 +1,17 @@
+function solution(arrayA, arrayB) {
+    let minA = arrayA.sort((a,b) => a-b)
+    let minB = arrayB.sort((a,b) => a-b)
+    
+    return Math.max(qqq(minA,minB),qqq(minB,minA))
+
+}
+
+function qqq(arr1,arr2){
+    let num = arr1[0]
+    for(let i = num; i > 0;i-- ){
+        if(arr1.every((el) => el % i === 0) && arr2.every((el) => el % i !== 0)){
+            return i
+        }
+    }
+    return 0
+}

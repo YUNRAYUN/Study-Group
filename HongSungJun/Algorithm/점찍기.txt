@@ -1,0 +1,12 @@
+function solution(k,d){
+  let arr = []
+  let count = 0
+  
+  for(let x = 0; x <= d; x = x+k){
+    const num = Math.sqrt(d**2 - x**2)
+    
+    count += Math.ceil(num / k) + (num % k === 0 ? 1 : 0)
+
+  }
+  return count
+}

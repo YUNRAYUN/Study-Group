@@ -1,0 +1,35 @@
+function solution(picks, minerals) {
+    const m = [[1,1,1],[5,1,1],[25,5,1]]
+    const obj = {
+        'diamond' : 0,
+        'iron' : 1,
+        'stone': 2
+    }
+    let res = 10000000
+    function dfs(index, d,ir,st,mineral,count){
+        if(index >= mineral.length || (!d && !ir  && !st)){
+          
+            res = Math.min(res,count)
+          return
+        }
+      
+        
+        
+        let dp = 0
+        let irp = 0
+        let stp = 0
+        
+        for(let i = index;i < Math.min(index+5,mineral.length);i++){
+            dp += m[0][obj[mineral[i]]]
+            irp += m[1][obj[mineral[i]]]
+            stp += m[2][obj[mineral[i]]]
+        }
+        
+        if(d) dfs(index + 5,d-1,ir,st,mineral,count+dp)
+        if(ir) dfs(index + 5,d,ir-1,st,mineral,count+irp)
+        if(st) dfs(index + 5,d,ir,st-1,mineral,count+stp)
+    }
+    dfs(0,picks[0],picks[1],picks[2],minerals,0)
+    return res
+    
+}

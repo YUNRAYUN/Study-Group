@@ -1,0 +1,54 @@
+class Heap {
+  constructor() {
+    this.container = []
+  }
+
+  insert(data) {
+    this.container.push(data);
+  }
+
+  extractMax() {
+    this.container.sort((a,b) => b-a)
+    this.container.shift()
+  }
+   extractMin() {
+    this.container.sort((a,b) => a-b)
+    this.container.shift()
+  }
+}
+
+function solution(arr){
+  let he = new Heap()
+  for(let i = 0; i < arr.length;i++){
+    const [fir,sec] = arr[i].split(" ")
+    if(fir === "I"){
+      he.insert(+sec)
+    }
+    else{
+      if(sec === "1"){
+        if(he.container){
+          he.extractMax()
+        }
+        else{
+          continue;
+        }
+        
+      }
+      else{
+        if(he.container){
+          he.extractMin()
+        }
+        else{
+          continue;
+        }
+      }
+    }
+  }
+  const answer = he.container.sort((a,b) => b-a)
+  
+  if(answer.length === 0){
+    return [0,0]
+  }
+  return [answer[0], answer[answer.length-1]]
+  
+}

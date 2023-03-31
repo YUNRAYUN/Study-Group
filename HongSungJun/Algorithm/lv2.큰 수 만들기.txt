@@ -1,0 +1,41 @@
+10번 문제 탈락
+function solution(number, k) {
+    let stack = [];
+    
+    number = number.split("");
+    
+    while(number.length && k > 0){
+        stack.push(number.shift())
+        while(stack[stack.length-1] < number[0] && k > 0){
+            stack.pop();
+            k = k-1;
+        }
+    }
+    
+    if(k !== 0){
+       stack = stack.slice(0,-k);
+    }
+    
+    return stack.join("") + number.join("");
+    
+}
+
+10번 문제 성공 (shift의 경우 최악의 경우 시간복잡도가 좋지 못함)
+
+function solution(number, k) {
+    let stack = [];
+
+    let arr = number.split('').reverse();
+
+    while(arr.length && k>0){
+        stack.push(arr.pop())
+        while(stack[stack.length-1] < arr[arr.length-1] && k>0) {
+            stack.pop();
+            k = k-1;
+        }
+    }
+
+    if(k !== 0) stack = stack.slice(0, -k) 
+
+    return stack.join('') + arr.reverse().join('')
+}

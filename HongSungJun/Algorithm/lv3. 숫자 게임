@@ -1,0 +1,14 @@
+function solution(A, B) {
+    let count = 0
+    A.sort((a,b) => b-a)
+    B.sort((a,b) => a-b)
+    for(let i = 0; i < A.length;i++){
+        let max = B[B.length-1]
+        if(A[i] < max) {
+            count++
+            B.pop()
+        }
+    }
+    return count
+    
+}

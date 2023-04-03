@@ -1,0 +1,33 @@
+function solution(arr) {
+    let size = arr.length
+    let count = size**2
+    let answer = []
+    const sumOne = (arr) =>{
+        let result = []
+        for(let i = 0; i < arr.length; i = i+2){
+            const col = []
+            for(let j = 0; j < arr.length;j = j+2){
+                let sum = arr[i][j] + arr[i][j+1] + arr[i+1][j] + arr[i+1][j+1]
+                if(arr.length === size){
+                    if(sum === 4 || sum === 0) count -= 3
+                    col.push(sum === 4 ? 1.1 : ~~(sum))
+                }
+                else{
+                    if(sum === 4.4 || sum === 0) count -= 3
+                    col.push(sum === 4.4 ? 1.1 : ~~(sum))
+                }
+            }
+            result.push(col)
+        }
+        
+        if(result.length === 1){
+            answer = ~~(result[0][0])
+            return
+        } 
+        else{
+          sumOne(result)
+        } 
+    }
+    sumOne(arr)
+    return [count-answer,answer]
+}

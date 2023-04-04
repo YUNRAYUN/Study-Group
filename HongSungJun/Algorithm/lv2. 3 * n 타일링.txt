@@ -1,0 +1,15 @@
+function solution(n) {
+    let arr = []
+    
+    arr[0] = 0
+    arr[1] = 1
+    arr[2] = 3
+    arr[3] = 0
+    arr[4] = 11
+    
+    for(let i = 5; i <= n; i++){
+      arr[i] = ((arr[i-2] * 4 % 1000000007) - (arr[i-4] % 1000000007) + 1000000007) % 1000000007
+    }
+    
+    return arr[n]
+}

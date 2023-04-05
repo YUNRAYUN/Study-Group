@@ -1,0 +1,26 @@
+function solution(topping) {
+  let map1 = new Map()
+  let map2 = new Map()
+  let answer = 0
+  
+  for(qqq of topping){
+    map2.set(qqq, (map2.get(qqq) || 0) + 1)
+  }
+  
+  
+  
+  for(qqq of topping){
+    map2.set(qqq,map2.get(qqq)-1)
+    
+    map1.set(qqq,true)
+    
+    if(!map2.get(qqq)) map2.delete(qqq)
+    
+    if(map2.size === map1.size){
+      
+      answer++
+    } 
+      
+  }
+  return answer
+}

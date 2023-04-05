@@ -1,0 +1,36 @@
+function solution(plans) {
+    let answer = []
+    let obj = {}
+    
+    plans.forEach((el) => {
+        el[1] = (+el[1].split(":")[0] * 60) + (+el[1].split(":")[1])
+        obj[el[1]] = [+el[2],el[0]]
+    })
+    
+    plans.sort((a,b) => a[1] - b[1])
+    
+    
+    let start = plans[0][1]
+    let stack = []
+    let count = 0
+    
+    while(count !== plans.length){
+        
+        if(stack.length){
+            stack[stack.length-1][0]--
+            
+            if(stack[stack.length-1][0] === 0){
+                answer.push(stack[stack.length-1][1])
+                stack.pop()
+                count++
+            }
+        }
+        
+        if(obj[start]) stack.push(obj[start])
+        
+        start++
+    }
+    return answer
+    
+    
+}

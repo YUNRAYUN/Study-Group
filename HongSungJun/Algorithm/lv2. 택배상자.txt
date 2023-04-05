@@ -1,0 +1,72 @@
+시간초과
+
+function solution(order) {
+    let arr = [] // 보조
+    let len = order.length;
+    let num = 1;
+    while(true){
+      const idx = arr.indexOf(order[0]);
+      if(idx === -1){
+        while(true){
+          if(num === order[0]){
+            order.splice(order.indexOf(num),1);
+            num++;
+            break;
+          } 
+          else{
+            arr.push(num);
+            num++;
+          }
+          
+        }
+      }
+      else{
+        
+        if(arr.at(-1) !== order[0]){
+          break;
+        }
+        order.shift();
+        arr.pop();
+      }
+      
+      if(order.length === 0){
+         break; 
+      } 
+      
+    }
+      
+    return len-order.length;
+    
+    
+}
+
+통과
+
+function solution(order) {
+    let stack = []
+    let box = 1
+    let answer = 0
+    for(qqq of order){
+      let check = false
+        while(true){
+          
+            if(stack.length === 0) stack.push(box++)
+            
+            if(qqq > stack.at(-1)) stack.push(box++)
+            
+            else if(qqq === stack.at(-1)){
+                stack.pop()
+                answer++
+              check = true
+                break
+            }
+            else break
+
+        }
+      if(!check) break
+    }
+    return answer
+    
+    
+}
+

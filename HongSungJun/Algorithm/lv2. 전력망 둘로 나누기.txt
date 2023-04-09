@@ -1,0 +1,39 @@
+function solution(n, wires) {
+    const obj = {}
+    let answer = []
+    
+    for(let qqq of wires){
+        const [start,end] = qqq
+        if(obj[start] === undefined) obj[start] = [end]
+        else obj[start].push(end)
+        
+        if(obj[end] === undefined) obj[end] = [start]
+        else obj[end].push(start)
+    }
+    
+    for(let qqq of wires){
+        const [start,end] = qqq
+        let visited = {}
+        let stack = [...obj[start]]
+        let count = 1
+        
+        
+        
+        visited[start] = true
+        visited[end] = true
+        
+        while(stack.length !== 0){
+            let temp = stack.pop()
+            if(!visited[temp]){
+                visited[temp] = true
+                stack.push(...obj[temp])
+                count++
+            }
+        }
+        answer.push(Math.abs(count*2 - n))
+        
+        
+    }
+    
+    return Math.min(...answer)
+}

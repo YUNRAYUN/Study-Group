@@ -8,16 +8,16 @@ function solution(m, n, board) {
         
         for(let y = 0; y < m-1;y++){
             for(let x = 0; x < n-1;x++){
-                if(arr1[x][y] === "") continue
+                if(arr1[y][x] === "") continue
                 
-                if(arr1[x][y] === arr1[x+1][y] && 
-                   arr1[x][y] === arr1[x][y+1] &&
-                   arr1[x][y] === arr1[x+1][y+1]
+                if(arr1[y][x] === arr1[y+1][x] && 
+                   arr1[y][x] === arr1[y][x+1] &&
+                   arr1[y][x] === arr1[y+1][x+1]
                   ){
-                    arr2[x][y] = ""
-                    arr2[x+1][y] = ""
-                    arr2[x][y+1] = ""
-                    arr2[x+1][y+1] = ""
+                    arr2[y][x] = ""
+                    arr2[y+1][x] = ""
+                    arr2[y][x+1] = ""
+                    arr2[y+1][x+1] = ""
                     count++
                 }
             }
@@ -27,8 +27,8 @@ function solution(m, n, board) {
             for(let x = 0; x < n; x++){
                 if(arr2[y+1][x] === ""){
                     for(let i = y; i >= 0; i--){
-                        arr2[y+1][x] = arr2[y][x]
-                        arr2[y][x] = ""
+                        arr2[i+1][x] = arr2[i][x]
+                        arr2[i][x] = ""
                     }
                 }
             }
@@ -37,7 +37,8 @@ function solution(m, n, board) {
         if(count === 0) break
     }
     let boardCount = board.reduce((acc,cur) => acc + cur.split("").length,0)
-    let newBoardCount = arr2.reduce((acc,cur) => acc + cur.split("").filter((el) => el !== "").length,0)
+    
+    let newBoardCount = arr2.reduce((acc,cur) => acc + cur.filter((el) => el !== "").length,0)
     
     return boardCount - newBoardCount
 }

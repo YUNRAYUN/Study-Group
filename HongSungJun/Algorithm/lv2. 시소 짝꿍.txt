@@ -1,0 +1,25 @@
+function solution(weights) {
+    let arr = [1.5,(4/3),2]
+    let obj = {}
+    let answer = 0
+
+    for(let i = 0 ;i < weights.length;i++){
+        if(obj[weights[i]] === undefined){
+            obj[weights[i]] = 1
+        }
+        else{
+            answer+=obj[weights[i]]
+            obj[weights[i]]++
+        }
+    }
+    let newArr = Object.keys(obj)
+    
+    for(let i = 0; i < newArr.length;i++){
+        for(let qqq of arr){
+            const num = newArr.indexOf(String(newArr[i] * qqq))
+            if(num !== -1) answer+=obj[newArr[i]] * obj[newArr[i] * qqq]
+            
+        }
+    }
+    return answer
+}

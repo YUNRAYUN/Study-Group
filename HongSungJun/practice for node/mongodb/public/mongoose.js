@@ -51,7 +51,7 @@ document.querySelectorAll('#user-list tr').forEach((el) => {
         td.textContent = comment._id;
         row.appendChild(td);
         td = document.createElement('td');
-        td.textContent = comment.commenter.name;
+        td.textContent = comment.userId.name;
         row.appendChild(td);
         td = document.createElement('td');
         td.textContent = comment.comment;

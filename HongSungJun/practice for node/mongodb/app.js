@@ -3,6 +3,9 @@ const path = require('path')
 const morgan = require('morgan')
 const nunjucks = require('nunjucks')
 const mongoose = require('mongoose')
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/user');
+const commentsRouter = require('./routes/comment');
 const app = express()
 
 app.set('port', process.env.PORT || 3002);
@@ -16,6 +19,10 @@ app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/comments', commentsRouter);
 
 
 app.use((req, res, next) => {
